@@ -1,0 +1,20 @@
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: news_
+      logic-delete-field: isDeleted
+      id-type: auto
+  type-aliases-package: com.qing.pojo
+
+jwt:
+  token:
+    tokenExpiration: 120
+    tokenSignKey: headline123456
+spring:
+  datasource:
+    druid:
+      username: root
+      url: jdbc:mysql://192.168.2.21/sm_db
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: root
+    type: com.alibaba.druid.pool.DruidDataSource
