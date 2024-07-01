@@ -6,12 +6,14 @@ import com.qing.service.UserService;
 import com.qing.utils.Result;
 import com.qing.utils.ResultCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
 @CrossOrigin
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
@@ -41,6 +43,7 @@ public class UserController {
     @RequestMapping("checkLogin")
     public Result checkLogin(HttpServletRequest request){
         String token = request.getHeader("token");
+        log.warn("token:------------------->" + token);
         if (StringUtils.isEmpty(token)) {
             return Result.build(null, ResultCodeEnum.NOTLOGIN);
         }
