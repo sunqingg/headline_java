@@ -4,12 +4,16 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @TableName news_user
  */
 //@TableName(value ="news_user")
 @Data
+//@Getter
+//@Setter
 public class User implements Serializable {
     @TableId
     private Integer uid;
@@ -21,9 +25,11 @@ public class User implements Serializable {
     private String nickName;
 
     @Version
+//    @TableField(select = false)
     private Integer version;
 
     @TableLogic
+//    @TableField(select = false)
     private Integer isDeleted;
 
     private static final long serialVersionUID = 1L;

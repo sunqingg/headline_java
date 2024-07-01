@@ -30,10 +30,13 @@ public class Headline implements Serializable {
     private Date updateTime;
 
     @Version
+//    @TableField(select = false)
     private Integer version;
 
     @TableLogic
+//    @TableField(select = false)
     private Integer isDeleted;
 
     private static final long serialVersionUID = 1L;
+//     @TableField(exist = false) 注明非数据库字段属性
 }

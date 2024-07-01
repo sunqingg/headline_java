@@ -3,6 +3,7 @@ package com.qing.service;
 import com.qing.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.qing.utils.Result;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
 * @author Administrator
@@ -12,4 +13,11 @@ import com.qing.utils.Result;
 public interface UserService extends IService<User> {
     Result getIdByUser(User user);
 
+    Result getUserInfo(HttpServletRequest request);
+
+    Result checkUserName(String username);
+
+    Result regist(User user);
+
+    Result checkLogin(String token);
 }

@@ -1,26 +1,45 @@
 package com.qing.controller;
 
-import com.qing.mapper.HeadlineMapper;
-import com.qing.pojo.PortalVo;
+import com.qing.pojo.Headline;
+import com.qing.pojo.HeadlineVo;
 import com.qing.service.HeadlineService;
-import com.qing.service.impl.HeadlineServiceImpl;
+import com.qing.utils.JwtHelper;
 import com.qing.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("portal")
+@RequestMapping("headline")
 @CrossOrigin
 public class HeadlineController {
-
     @Autowired
     private HeadlineService headlineService;
 
-    @RequestMapping("findNewsPage")
-    public Result findNewsPage(@RequestBody PortalVo portalVo) {
-        return headlineService.findNewsPage(portalVo);
+    @Autowired
+    private JwtHelper jwtHelper;
+
+    @RequestMapping("publish")
+    public Result publish(@RequestBody HeadlineVo headline, @RequestHeader String token) {
+//        return headlineService.publish(headlineVo,token);
+//        return Result.ok(null);
+        int userId = jwtHelper.getUserId(token).intValue();
+//        headline.setPublisher(userId);
+        Result result = headlineService.publish(headline,userId);
+        return result;
+    }
+
+    @RequestMapping("findHeadlineByHid")
+    public Result findHeadlineByHid(String hid) {
+        return headlineService.findHeadlineByHid(hid);
+    }
+
+    @RequestMapping("update")
+    public Result update(@RequestBody Headline headline) {
+        return headlineService.update(headline);
+    }
+
+    @RequestMapping("removeByHid")
+    public Result removeByHid(Integer hid) {
+        return headlineService.removeByHid(hid);
     }
 }

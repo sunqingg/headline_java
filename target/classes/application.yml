@@ -5,6 +5,8 @@ mybatis-plus:
       logic-delete-field: isDeleted
       id-type: auto
   type-aliases-package: com.qing.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 jwt:
   token:
