@@ -65,8 +65,9 @@ public class PortalServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
         LambdaQueryWrapper<Headline> queryWrapper = new LambdaQueryWrapper<>();
 //        queryWrapper.like(Headline::getArticle,portalVo.getKeyWords()).or().
 //                like(Headline::getTitle,portalVo.getKeyWords());
-        queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords())
-                        .eq(portalVo.getType() != null,Headline::getType,portalVo.getType());
+//        queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords())
+//                        .eq(portalVo.getType() != null,Headline::getType,portalVo.getType());
+        queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords());
         headlineMapper.selectPage(page,queryWrapper);
         List<Headline> records = page.getRecords();
         HashMap<Object, Object> map = new HashMap<>();
