@@ -63,11 +63,13 @@ public class PortalServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
     public Result findNewsPage(PortalVo portalVo) {
         IPage<Headline> page = new Page<>(portalVo.getPageNum(),portalVo.getPageSize());
         LambdaQueryWrapper<Headline> queryWrapper = new LambdaQueryWrapper<>();
-//        queryWrapper.like(Headline::getArticle,portalVo.getKeyWords()).or().
-//                like(Headline::getTitle,portalVo.getKeyWords());
-//        queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords())
-//                        .eq(portalVo.getType() != null,Headline::getType,portalVo.getType());
-        queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords());
+
+        if (portalVo.getType() == 0){
+            queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords());
+        }else {
+            queryWrapper.like(!StringUtils.isEmpty(portalVo.getKeyWords()),Headline::getTitle,portalVo.getKeyWords())
+                .eq(portalVo.getType() != null,Headline::getType,portalVo.getType());
+        }
         headlineMapper.selectPage(page,queryWrapper);
         List<Headline> records = page.getRecords();
         HashMap<Object, Object> map = new HashMap<>();
